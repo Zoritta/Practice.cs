@@ -1,30 +1,31 @@
-﻿
+﻿using System;
 
-internal class Program
+class Program
 {
     static void Main(string[] args)
     {
-        var numbers = new List<int>();
-        while (numbers.Count < 5)
+        var sentence = "This is going to be a really really really long text.";
+        const int maxLength = 18;
+
+        if (sentence.Length < maxLength)
+            Console.WriteLine(sentence);
+        else
         {
-            Console.WriteLine("Please enter a number that you have not entered before: ");
-            var enteredNumber = Convert.ToInt32(Console.ReadLine());
-            if (numbers.Contains(enteredNumber))
+            var words = sentence.Split(' ');
+            var totalCharacters = 0;
+            var summaryWords = new List<string>();
+
+            foreach ( var word in words )
             {
-                Console.WriteLine("You have already entered " + enteredNumber);
-                continue;
+                summaryWords.Add(word);
+
+                totalCharacters += word.Length + 1;
+                if (totalCharacters > maxLength)
+                    break;
             }
 
-            numbers.Add(enteredNumber);
-        }
-
-        numbers.Sort();
-        Console.WriteLine();
-        Console.WriteLine("These are the numbers you entered and I sorted:");
-
-        foreach (var number in numbers)
-        {
-            Console.WriteLine(number);
+            var summary = String.Join(" ", summaryWords) + "...";
+            Console.WriteLine(summary);
         }
     }
 }

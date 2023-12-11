@@ -1,35 +1,17 @@
-﻿using System;
+﻿using Practice.cs;
+using System;
 
-class Program
+namespace Practice.cs
 {
-    static void Main(string[] args)
+    class Program
     {
-        var sentence = "This is going to be a really really really long text.";
-        var summary = SummerizedText(sentence);
-        Console.WriteLine(summary);
-
-    }
-
-    static string SummerizedText(string text, int maxLength = 18)
-    {
-        if (text.Length < maxLength)
-            return text;
-        
-        
-        var words = text.Split(' ');
-        var totalCharacters = 0;
-        var summaryWords = new List<string>();
-
-        foreach (var word in words)
+        static void Main(string[] args)
         {
-            summaryWords.Add(word);
+            var sentence = "This is going to be a really really really long text.";
+            var summary = StringUtility.SummerizedText(sentence);
+            Console.WriteLine(summary);
 
-            totalCharacters += word.Length + 1;
-            if (totalCharacters > maxLength)
-                break;
         }
 
-        return String.Join(" ", summaryWords) + "...";
     }
-
 }

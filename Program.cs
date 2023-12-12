@@ -9,33 +9,33 @@ namespace Practice.cs
     {
         public static void Main(string[] args)
         {
-            var numbers = new List<int>();
-            while(true)
-            {
-                Console.WriteLine("Enter a number (or 'Quit' to exit):");
-                var input = Console.ReadLine();
+            Console.Write("Enter a few numbers (eg 1-2-3-4): ");
+            var input = Console.ReadLine();
+            var checkResult = CheckConsecutive(input);
+            Console.WriteLine(checkResult);
 
-                if (input.ToLower() == "quit")
-                    break;
-                numbers.Add(Convert.ToInt32(input));
-            }
 
-            Console.WriteLine("Unique numbers:");
-            foreach (var number in GetUniqueNumbers(numbers))
-                Console.WriteLine(number);
         }
-
-        public static List<int> GetUniqueNumbers(List<int> numbers)
+        public static string CheckConsecutive(string input)
         {
+            var numbers = new List<int>();
+            foreach (var number in input.Split('-'))
+                numbers.Add(Convert.ToInt32(number));
 
-            var uniques = new List<int>();
-            foreach (var number in numbers)
+            numbers.Sort();
+
+            var isConsecutive = true;
+            for (var i = 1; i < numbers.Count; i++)
             {
-                if (!uniques.Contains(number))
-                    uniques.Add(number);
+                if (numbers[i] != numbers[i - 1] + 1)
+                {
+                    isConsecutive = false;
+                    break;
+                }
             }
 
-            return uniques;
+            var message = isConsecutive ? "Consecutive" : "Not Consecutive";
+            return message;
         }
 
     }
